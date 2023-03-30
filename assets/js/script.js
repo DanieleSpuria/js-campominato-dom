@@ -48,26 +48,8 @@ function cells(num, width, box2) {
     cell.style.width = width;
     cell.id = i + 1;
     box2.appendChild(cell);
-    
-      cell.addEventListener('click', function() {
-         
-        if (points === (num - 5 - 1)) {
-          message = `Hai vinto! Hai accumulato ${points} punti!`
-            output.innerHTML = message;
-        } else {
-          if (bombs.includes(parseInt(cell.id))) {
-            cell.style.backgroundColor = 'red';
-            message = `Hai perso! Hai comunque accumulato ${points} punti!`
-            output.innerHTML = message;
-          } else {
-            cell.classList.toggle('active');
-            points++;
-          }
-        }
-          console.log('points', points);
-          console.log('cell.id', parseInt(i + 1));
+    clickCell (griglia, cell, num);
 
-      })
   } 
 }
 
@@ -81,7 +63,6 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     btn1.classList.remove('d-none');
     cells(num, width, box2);
     createBomb(num);
-    // bombId();
 
     console.log(bombs);
 
@@ -97,6 +78,35 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     btn1.classList.add('d-none');
     
   }) 
+}
+
+function clickCell (box, cell, num) {
+
+  cell.addEventListener('click', function() {
+     
+    const end = document.createElement('div');
+        end.className = 'end';
+
+    if (points === (num - 5 - 1)) {
+      box.appendChild(end);
+      message = `Hai vinto! Hai accumulato ${points} punti!`
+        output.innerHTML = message;
+    } else {
+      if (bombs.includes(parseInt(cell.id))) {
+        cell.style.backgroundColor = 'red';
+        box.appendChild(end);
+        message = `Hai perso! Hai comunque accumulato ${points} punti!`
+        output.innerHTML = message;
+      } else {
+        cell.classList.toggle('active');
+        points++;
+      }
+    }
+
+      console.log('points', points);
+      console.log('cell.id', parseInt(cell.id));
+
+    })
 }
 
 function createBomb (num) {
