@@ -26,6 +26,12 @@ btnClick(btn49, btnReturn, 49, 'calc(100% / 7)', btn, griglia, '70%');
 
 //************************************************************************************
 const numBombs = 16;
+let bombs = [];
+
+
+
+
+
 
 
 
@@ -58,6 +64,8 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     box2.style.width = widthBox2;
     btn1.classList.remove('d-none');
     cells(num, width, box2);
+    verificaRandom()
+    console.log(bombs);
 
   })  
 
@@ -70,11 +78,21 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
   }) 
 }
 
-function verificaRandom (getRandomNumber) {
+function createRandom () {
 
+  for (let i = 1; i <= numBombs; i++) {
 
+    let bomb = getRandomNumber(1, numBombs);
+    
+    while (!bombs.includes(bomb)) {
 
+      bombs.push(bomb);
+      
+    }
+  }
 }
+
+
 
 function getRandomNumber (min, max) {
 
