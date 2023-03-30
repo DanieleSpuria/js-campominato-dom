@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  height: 100vh;
+  background-color: rgb(18, 106, 136);
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  width: 50px;
+  margin: 10px;
+  padding: 5px 20px;
+}
+
+.container, .btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  flex-wrap: wrap;
+  width: 40%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.griglia {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  background-color: lightblue;
+  border: 1px solid white;
+}
+
+.d-none {
+  display: none;
+}
+
+.active {
+  background-color: rgb(32, 179, 228);
+}
