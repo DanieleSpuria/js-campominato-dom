@@ -1,5 +1,8 @@
 /************************************************************************ Sviluppo ***
-
+1. generare 16 numeri random unici assegnandoli alle bombe;
+2. se al click di una cella, l'id è presente tra i numeri delle bombe, la cella diventa rossa e la partita termina, altrimenti la partita continua;
+3. condizioni di fine partita.
+4. esito, punteggio e overlay;
 *************************************************************************************/
 
 
@@ -18,6 +21,11 @@ const btn49 = document.getElementById('49');
 btnClick(btn100, btnReturn, 100, 'calc(100% / 10)', btn, griglia, '100%');
 btnClick(btn81, btnReturn, 81, 'calc(100% / 9)', btn, griglia, '90%');
 btnClick(btn49, btnReturn, 49, 'calc(100% / 7)', btn, griglia, '70%');
+
+
+
+//************************************************************************************
+const numBombs = 16;
 
 
 
@@ -60,4 +68,17 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     btn1.classList.add('d-none');
     
   }) 
+}
+
+function verificaRandom (getRandomNumber) {
+
+
+
+}
+
+function getRandomNumber (min, max) {
+
+  let random = Math.floor(Math.random() * (max - min + 1) + min);
+  return random;
+
 }
