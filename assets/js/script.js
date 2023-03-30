@@ -51,7 +51,10 @@ function cells(num, width, box2) {
     
       cell.addEventListener('click', function() {
          
-        
+        if (points === (num - 5 - 1)) {
+          message = `Hai vinto! Hai accumulato ${points} punti!`
+            output.innerHTML = message;
+        } else {
           if (bombs.includes(parseInt(cell.id))) {
             cell.style.backgroundColor = 'red';
             message = `Hai perso! Hai comunque accumulato ${points} punti!`
@@ -60,7 +63,8 @@ function cells(num, width, box2) {
             cell.classList.toggle('active');
             points++;
           }
-          
+        }
+          console.log('points', points);
           console.log('cell.id', parseInt(i + 1));
 
       })
@@ -98,7 +102,7 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
 function createBomb (num) {
 
   let i = 1;
-  while ( i <= numBombs ) {
+  while ( i <= 5 ) {
 
     let bomb = getRandomNumber(1, num);
 
