@@ -10,10 +10,12 @@
 //*************************************************************************** Html ***
 const btn = document.getElementsByClassName('btn')[0];
 const griglia = document.getElementsByClassName('griglia')[0];
+const output = document.getElementById('output');
 const btnReturn = document.getElementById('return');  
 const btn100 = document.getElementById('100');
 const btn81 = document.getElementById('81');
 const btn49 = document.getElementById('49');
+let message;
 
 
 
@@ -27,6 +29,7 @@ btnClick(btn49, btnReturn, 49, 'calc(100% / 7)', btn, griglia, '70%');
 //************************************************************************************
 const numBombs = 16;
 let bombs = [];
+let points = 0;
 
 
 
@@ -47,14 +50,18 @@ function cells(num, width, box2) {
     box2.appendChild(cell);
     
       cell.addEventListener('click', function() {
-          
-        if (bombs.includes(parseInt(cell.id))) {
-          cell.style.backgroundColor = 'red';
-        } else {
-          cell.classList.toggle('active');
-        }
+         
         
-        console.log('cell.id', parseInt(i + 1));
+          if (bombs.includes(parseInt(cell.id))) {
+            cell.style.backgroundColor = 'red';
+            message = `Hai perso! Hai comunque accumulato ${points} punti!`
+            output.innerHTML = message;
+          } else {
+            cell.classList.toggle('active');
+            points++;
+          }
+          
+          console.log('cell.id', parseInt(i + 1));
 
       })
   } 
@@ -81,6 +88,8 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     box1.classList.remove('d-none');
     box2.innerHTML = '';
     bombs = [];
+    points = 0;
+    output.innerHTML = '';
     btn1.classList.add('d-none');
     
   }) 
