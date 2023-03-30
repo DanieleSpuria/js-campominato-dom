@@ -15,7 +15,6 @@ const btnReturn = document.getElementById('return');
 const btn100 = document.getElementById('100');
 const btn81 = document.getElementById('81');
 const btn49 = document.getElementById('49');
-let message;
 
 
 
@@ -43,9 +42,34 @@ function cells(num, width, box2) {
     cell.style.width = width;
     cell.id = i + 1;
     box2.appendChild(cell);
-    clickCell (griglia, cell, num);
+    clickCell (box2, cell, num);
 
   } 
+}
+
+function clickCell (box2, cell, num) {
+
+  cell.addEventListener('click', function() {
+     
+    this.classList.toggle('active');
+    let ris = false;
+
+    if (points === (num - numBombs - 1)) {
+      ris = true;  
+      end(ris, box2);
+    } else {
+      if (bombs.includes(parseInt(this.id))) {
+        this.style.backgroundColor = 'red';
+        end(ris, box2);
+      } else {
+        points++
+      }
+    }
+
+      console.log('points', points);
+      console.log('cell.id', parseInt(this.id));
+
+    })
 }
 
 function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
@@ -75,36 +99,12 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
   }) 
 }
 
-function clickCell (box, cell, num) {
-
-  cell.addEventListener('click', function() {
-     
-    let ris = false;
-
-    if (points === (num - numBombs - 1)) {
-      ris = true;  
-      end(ris, box);
-    } else {
-      if (bombs.includes(parseInt(this.id))) {
-        this.style.backgroundColor = 'red';
-        end(ris, box);
-      } else {
-        this.classList.toggle('active');
-        points++;
-      }
-    }
-
-      console.log('points', points);
-      console.log('cell.id', parseInt(this.id));
-
-    })
-}
-
-function end(ris, box) {
+function end(ris, box2) {
   
   const end = document.createElement('div');
   end.className = 'end';
-  box.appendChild(end);
+  box2.appendChild(end);
+  let message;
 
   if (ris) {
     message = `Hai vinto! Hai accumulato ${points} punti!` 
