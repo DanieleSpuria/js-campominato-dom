@@ -1,6 +1,6 @@
 /************************************************************************ Sviluppo ***
 1. generare 16 numeri random unici assegnandoli alle bombe;
-2. se al click di una cella, l'id è presente tra i numeri delle bombe, la cella diventa rossa e la partita termina, altrimenti la partita continua;
+2. se al click di una cella, l'id della cella è presente tra i numeri delle bombe, la cella diventa rossa e la partita termina, altrimenti la partita continua;
 3. condizioni di fine partita.
 4. esito, punteggio e overlay;
 *************************************************************************************/
@@ -49,6 +49,10 @@ function cells(num, width, box2) {
     cell.addEventListener('click', function() {
       
       cell.classList.toggle('active');
+
+      // if (cell.id === bombId) {
+      //   cell.style.backgroundColor = 'red';
+      // }
       console.log(cell.id);
 
     })
@@ -64,7 +68,8 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     box2.style.width = widthBox2;
     btn1.classList.remove('d-none');
     cells(num, width, box2);
-    verificaRandom()
+    createBomb(num);
+    
     console.log(bombs);
 
   })  
@@ -73,22 +78,33 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
       
     box1.classList.remove('d-none');
     box2.innerHTML = '';
+    bombs = [];
     btn1.classList.add('d-none');
     
   }) 
 }
 
-function createRandom () {
+// function bombId () {
 
-  for (let i = 1; i <= numBombs; i++) {
+//   for (let i = 1; i <= numBombs; i++) {
 
-    let bomb = getRandomNumber(1, numBombs);
-    
-    while (!bombs.includes(bomb)) {
+//     let bomb = bombs[i];
 
-      bombs.push(bomb);
-      
-    }
+//     return bomb;
+//   }
+// }
+
+function createBomb (num) {
+
+  let i = 1;
+  while ( i <= numBombs ) {
+
+    let bomb = getRandomNumber(1, num);
+
+      if ( !bombs.includes(bomb)){
+        bombs.push(bomb);
+        i++;
+      }
   }
 }
 
