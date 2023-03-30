@@ -33,11 +33,6 @@ let points = 0;
 
 
 
-
-
-
-
-
 //*********************************************************************** Funzioni ***
 function cells(num, width, box2) {
   
@@ -84,35 +79,47 @@ function clickCell (box, cell, num) {
 
   cell.addEventListener('click', function() {
      
-    const end = document.createElement('div');
-        end.className = 'end';
+    let ris = false;
 
-    if (points === (num - 5 - 1)) {
-      box.appendChild(end);
-      message = `Hai vinto! Hai accumulato ${points} punti!`
-        output.innerHTML = message;
+    if (points === (num - numBombs - 1)) {
+      ris = true;  
+      end(ris, box);
     } else {
-      if (bombs.includes(parseInt(cell.id))) {
-        cell.style.backgroundColor = 'red';
-        box.appendChild(end);
-        message = `Hai perso! Hai comunque accumulato ${points} punti!`
-        output.innerHTML = message;
+      if (bombs.includes(parseInt(this.id))) {
+        this.style.backgroundColor = 'red';
+        end(ris, box);
       } else {
-        cell.classList.toggle('active');
+        this.classList.toggle('active');
         points++;
       }
     }
 
       console.log('points', points);
-      console.log('cell.id', parseInt(cell.id));
+      console.log('cell.id', parseInt(this.id));
 
     })
+}
+
+function end(ris, box) {
+  
+  const end = document.createElement('div');
+  end.className = 'end';
+  box.appendChild(end);
+
+  if (ris) {
+    message = `Hai vinto! Hai accumulato ${points} punti!` 
+  } else {
+    message = `Hai perso! Hai comunque accumulato ${points} punti!`
+  }
+
+  output.innerHTML = message;
+
 }
 
 function createBomb (num) {
 
   let i = 1;
-  while ( i <= 5 ) {
+  while ( i <= numBombs ) {
 
     let bomb = getRandomNumber(1, num);
 
