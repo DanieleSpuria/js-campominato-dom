@@ -18,3 +18,4 @@ Aggiungere una `select` accanto al bottone di generazione, che fornisca una scel
 
 - genero numeri random;
 - creo le bombe e verifico che non si ripetano numeri uguali;
+- cliccando su celle contenti le bombe, diventa rossa;

@@ -46,16 +46,17 @@ function cells(num, width, box2) {
     cell.id = i + 1;
     box2.appendChild(cell);
     
-    cell.addEventListener('click', function() {
-      
-      cell.classList.toggle('active');
+      cell.addEventListener('click', function() {
+          
+        if (bombs.includes(parseInt(cell.id))) {
+          cell.style.backgroundColor = 'red';
+        } else {
+          cell.classList.toggle('active');
+        }
+        
+        console.log('cell.id', parseInt(i + 1));
 
-      // if (cell.id === bombId) {
-      //   cell.style.backgroundColor = 'red';
-      // }
-      console.log(cell.id);
-
-    })
+      })
   } 
 }
 
@@ -69,7 +70,8 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
     btn1.classList.remove('d-none');
     cells(num, width, box2);
     createBomb(num);
-    
+    // bombId();
+
     console.log(bombs);
 
   })  
@@ -84,16 +86,6 @@ function btnClick(btn, btn1, num, width, box1, box2, widthBox2) {
   }) 
 }
 
-// function bombId () {
-
-//   for (let i = 1; i <= numBombs; i++) {
-
-//     let bomb = bombs[i];
-
-//     return bomb;
-//   }
-// }
-
 function createBomb (num) {
 
   let i = 1;
@@ -101,14 +93,12 @@ function createBomb (num) {
 
     let bomb = getRandomNumber(1, num);
 
-      if ( !bombs.includes(bomb)){
+      if (!bombs.includes(bomb)){
         bombs.push(bomb);
         i++;
       }
   }
 }
-
-
 
 function getRandomNumber (min, max) {
 
